@@ -1,6 +1,7 @@
 package shelter;
 
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class VirtualPetApp {
@@ -17,14 +18,24 @@ public class VirtualPetApp {
     }
 
     private static void generatePets() {
-        VirtualPet pet1 = new VirtualPet();
-        VirtualPet pet2 = new VirtualPet();
+        VirtualPet pet1 = new VirtualPet("Max", "Max is a beautiful dog that is very loving.");
+        VirtualPet pet2 = new VirtualPet("Skippy", "Skippy is a young black puppy with lots of energy.");
         shelter.addPet("Max", pet1);
         shelter.addPet("Skippy", pet2);
     }
 
     private static void showPets() {
-        shelter.showPets();
+        Collection<VirtualPet> pets = shelter.showPets();
+        for (VirtualPet pet : pets)
+            System.out.println(pet.getName() + "\n" +
+                    "\tHunger: " + pet.getHunger() +
+                    "\tThirst: " + pet.getThirst() +
+                    "\tEnergy: " + pet.getEnergy());
+    }
+
+    public static String stringCapFirstLetter(String string) {
+        if (string.length() < 2) return string;
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
     private static void showPetNames() {
@@ -76,7 +87,7 @@ public class VirtualPetApp {
     private static void feedOptions() {
         System.out.println("Enter pet name or \"all\" to feed all:");
         showPetNames();
-        String response = input.nextLine();
+        String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
             shelter.feedAllPets();
@@ -88,7 +99,7 @@ public class VirtualPetApp {
     private static void waterOptions() {
         System.out.println("Enter pet name or \"all\" to water all:");
         showPetNames();
-        String response = input.nextLine();
+        String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
             shelter.waterAllPets();
@@ -100,7 +111,7 @@ public class VirtualPetApp {
     private static void playOptions() {
         System.out.println("Enter pet name or \"all\" to play with all:");
         showPetNames();
-        String response = input.nextLine();
+        String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
             shelter.playAllPets();
@@ -112,17 +123,19 @@ public class VirtualPetApp {
     private static void adoptOptions() {
         System.out.println("Enter pet name to adopt:");
         showPetNames();
-        String response = input.nextLine();
+        String response = stringCapFirstLetter(input.nextLine());
 
-        System.out.println("You adopted " + response + ". " + shelter.showDiscription(response));
+        System.out.println("You adopted " + response + ". " + shelter.showDescription(response));
         shelter.removePet(response);
     }
 
     private static void admitOptions() {
         System.out.println("Enter pet name to admit:");
-        String response = input.nextLine();
+        String name = stringCapFirstLetter(input.nextLine());
+        System.out.println("Enter pet description:");
+        String description = stringCapFirstLetter(input.nextLine());
 
-        shelter.addPet(response, new VirtualPet());
+        shelter.addPet(name, new VirtualPet(name, description));
     }
 
 }

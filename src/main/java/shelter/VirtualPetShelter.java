@@ -1,6 +1,7 @@
 package shelter;
 
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,10 @@ public class VirtualPetShelter {
     public VirtualPetShelter() {
     }
 
+    public VirtualPet returnVirtualPetByName(String name) {
+        return pets.get(name);
+    }
+
     public void addPet(String name, VirtualPet pet) {
         pets.put(name, pet);
     }
@@ -19,22 +24,22 @@ public class VirtualPetShelter {
         pets.remove(name);
     }
 
-    public void showPets() {
-        for (Map.Entry<String, VirtualPet> entry : pets.entrySet())
-            System.out.println("\t" + entry.getKey() + "\n" +
-                    "\t\tHunger: " + entry.getValue().getHunger() +
-                    "\t\tThirst: " + entry.getValue().getThirst() +
-                    "\t\tEnergy: " + entry.getValue().getEnergy());
+    public Collection<VirtualPet> showPets() {
+        return pets.values();
     }
 
     public void showPetNames() {
-        for (Map.Entry<String, VirtualPet> entry : pets.entrySet())
-            System.out.println(entry.getKey());
+        for (Map.Entry<String, VirtualPet> pet : pets.entrySet())
+            System.out.println(pet.getKey());
     }
 
     public void feedAllPets() {
         for (VirtualPet value : pets.values())
             value.feed();
+    }
+
+    public VirtualPet returnPet(String name) {
+        return pets.get(name);
     }
 
     public void feedPet(String name) {
@@ -50,7 +55,7 @@ public class VirtualPetShelter {
         pets.get(name).water();
     }
 
-    public String showDiscription(String name) {
+    public String showDescription(String name) {
         return pets.get(name).getDescription();
     }
 
@@ -67,4 +72,6 @@ public class VirtualPetShelter {
         for (VirtualPet value : pets.values())
             value.tick();
     }
+
+
 }
