@@ -28,11 +28,6 @@ public class VirtualPetShelter {
         return pets.values();
     }
 
-    public void showPetNames() {
-        for (Map.Entry<String, VirtualPet> pet : pets.entrySet())
-            System.out.println(pet.getKey());
-    }
-
     public void feedAllPets() {
         for (VirtualPet value : pets.values())
             value.feed();

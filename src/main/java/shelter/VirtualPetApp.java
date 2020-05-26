@@ -38,8 +38,11 @@ public class VirtualPetApp {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
-    private static void showPetNames() {
-        shelter.showPetNames();
+    private static void showPetNamesAndDescriptions() {
+        Collection<VirtualPet> pets = shelter.showPets();
+        for (VirtualPet pet : pets)
+            System.out.println(pet.getName() +
+                    ": " + pet.getDescription());
     }
 
     private static void welcome() {
@@ -86,7 +89,7 @@ public class VirtualPetApp {
 
     private static void feedOptions() {
         System.out.println("Enter pet name or \"all\" to feed all:");
-        showPetNames();
+        showPetNamesAndDescriptions();
         String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
@@ -98,7 +101,7 @@ public class VirtualPetApp {
 
     private static void waterOptions() {
         System.out.println("Enter pet name or \"all\" to water all:");
-        showPetNames();
+        showPetNamesAndDescriptions();
         String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
@@ -110,7 +113,7 @@ public class VirtualPetApp {
 
     private static void playOptions() {
         System.out.println("Enter pet name or \"all\" to play with all:");
-        showPetNames();
+        showPetNamesAndDescriptions();
         String response = stringCapFirstLetter(input.nextLine());
 
         if (response.toLowerCase().equals("all")) {
@@ -122,7 +125,7 @@ public class VirtualPetApp {
 
     private static void adoptOptions() {
         System.out.println("Enter pet name to adopt:");
-        showPetNames();
+        showPetNamesAndDescriptions();
         String response = stringCapFirstLetter(input.nextLine());
 
         System.out.println("You adopted " + response + ". " + shelter.showDescription(response));
